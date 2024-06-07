@@ -17,11 +17,45 @@ isort = "^5.13"
 mypy = "^1.10"
 pytest = "^8.2"
 pytest-mock = "^3.14"
+ruff = "^0.4.8"
 
 [tool.mypy]
 ignore_missing_imports = true
 disallow_untyped_defs = true
 plugins = "pydantic.mypy"
+
+[tool.ruff]
+exclude = [
+    ".git",
+    ".git-rewrite",
+    ".mypy_cache",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "build",
+    "dist",
+    "site-packages",
+]
+
+[tool.ruff.lint]
+select = [
+    "E", # pycodestyle errors
+    "W", # pycodestyle warnings
+    "F", # pyflakes
+    "C", # flake8-comprehensions
+    "B", # flake8-bugbear
+    "N", # PEP 8 naming convention
+]
+
+ignore = [
+    "E501", # line too long, handled by formatter
+    "W291", # trailing whitespace, handled by formatter
+]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
