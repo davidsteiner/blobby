@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "cloud-store"
+version = "0.0.1"
+description = "Cloud provider agnostic library for object storage."
+authors = ["David Steiner <david_j_steiner@yahoo.co.nz>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+boto3 = "^1.34"
+pydantic = "^2"
+
+[tool.poetry.group.dev.dependencies]
+boto3-stubs = "^1.34"
+isort = "^5.13"
+mypy = "^1.10"
+pytest = "^8.2"
+pytest-mock = "^3.14"
+
+[tool.mypy]
+ignore_missing_imports = true
+disallow_untyped_defs = true
+plugins = "pydantic.mypy"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

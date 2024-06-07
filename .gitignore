@@ -1,0 +1,13 @@
+.idea/
+.venv/
+build/
+dist/
+
+*.egg-info/
+__pycache__/
+
+*.py[cod]
+*.egg
+.coverage
+coverage.xml
+.mypy_cache
