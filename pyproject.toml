@@ -6,7 +6,7 @@ authors = ["David Steiner <david_j_steiner@yahoo.co.nz>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.10"
 
 boto3 = "^1.34"
 pydantic = "^2"

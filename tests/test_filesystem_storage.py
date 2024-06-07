@@ -5,7 +5,7 @@ from pydantic import BaseModel
 from cloud_store import FileSystemStorage
 
 
-def test_put_bytes(temp_dir) -> None:
+def test_put_bytes(temp_dir: Path) -> None:
     data = b"hello world"
     storage = FileSystemStorage(temp_dir, create_missing_dirs=True)
 
@@ -22,7 +22,7 @@ class TestData(BaseModel):
     int_field: int
 
 
-def test_put_model_object(temp_dir) -> None:
+def test_put_model_object(temp_dir: Path) -> None:
     data = TestData(str_field="str_field", int_field=3)
     storage = FileSystemStorage(temp_dir, create_missing_dirs=True)
 
