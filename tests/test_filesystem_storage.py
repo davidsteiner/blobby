@@ -1,5 +1,6 @@
 from pathlib import Path
 
+import pytest
 from pydantic import BaseModel
 
 from cloud_store import FileSystemStorage
@@ -15,6 +16,22 @@ def test_put_bytes(temp_dir: Path) -> None:
     retrieved_data = storage.get(relative_path)
 
     assert data == retrieved_data
+
+
+def test_delete(temp_dir: Path) -> None:
+    data = b"hello world"
+    storage = FileSystemStorage(temp_dir, create_missing_dirs=True)
+
+    relative_path = Path("my_storage") / "test_file"
+    storage.put(path=relative_path, data=data)
+
+    retrieved_data = storage.get(relative_path)
+    assert data == retrieved_data
+
+    storage.delete(relative_path)
+
+    with pytest.raises(FileNotFoundError):
+        storage.get(relative_path)
 
 
 class TestData(BaseModel):
