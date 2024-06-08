@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from pathlib import Path
 from typing import Type, TypeVar
 
 from pydantic import BaseModel
@@ -11,12 +10,12 @@ _ENCODING = "utf-8"
 
 
 class Storage(ABC):
-    def put_model_object(self, *, path: Path, obj: BaseModel) -> None:
+    def put_model_object(self, *, key: str, obj: BaseModel) -> None:
         data = obj.json(by_alias=True)
-        self.put(path=path, data=data.encode(_ENCODING))
+        self.put(key=key, data=data.encode(_ENCODING))
 
-    def get_model_object(self, *, path: Path, object_type: Type[T]) -> T:
-        data = self.get(path=path)
+    def get_model_object(self, *, key: str, object_type: Type[T]) -> T:
+        data = self.get(key=key)
         return object_type.parse_raw(data)
 
     @staticmethod
@@ -24,10 +23,10 @@ class Storage(ABC):
         return data.encode(_ENCODING)
 
     @abstractmethod
-    def put(self, path: Path, data: bytes | str) -> None: ...
+    def put(self, key: str, data: bytes | str) -> None: ...
 
     @abstractmethod
-    def get(self, path: Path) -> bytes: ...
+    def get(self, key: str) -> bytes: ...
 
     @abstractmethod
-    def delete(self, path: Path) -> bytes: ...
+    def delete(self, key: str) -> None: ...
