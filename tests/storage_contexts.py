@@ -7,7 +7,7 @@ from typing import Iterator, Callable
 
 import boto3
 
-from cloud_store import FileSystemStorage, S3Storage, Storage, MemoryStorage
+from blobby import FileSystemStorage, S3Storage, Storage, MemoryStorage
 
 
 StorageContext = Callable[[], AbstractContextManager[Storage]]

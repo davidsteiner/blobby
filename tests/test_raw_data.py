@@ -1,7 +1,7 @@
 from pathlib import Path
 
 import pytest
-from cloud_store.error import NoSuchKeyError
+from blobby.error import NoSuchKeyError
 from storage_contexts import STORAGE_CONTEXTS, StorageContext
 
 

@@ -1,6 +1,6 @@
 import typing
 
-from cloud_store.storage import Storage
+from blobby.storage import Storage
 
 if typing.TYPE_CHECKING:
     from mypy_boto3_s3 import S3Client

@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from cloud_store.storage import Storage
+from blobby.storage import Storage
 
 
 class FileSystemStorage(Storage):

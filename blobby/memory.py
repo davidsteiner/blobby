@@ -1,4 +1,4 @@
-from cloud_store import Storage
+from blobby import Storage
 
 
 class MemoryStorage(Storage):
