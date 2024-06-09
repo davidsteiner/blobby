@@ -2,11 +2,11 @@ from pathlib import Path
 
 import pytest
 from cloud_store.error import NoSuchKeyError
-from storage_contexts import STORAGE_CONTEXTS
+from storage_contexts import STORAGE_CONTEXTS, StorageContext
 
 
 @pytest.mark.parametrize(["storage_context"], [(c,) for c in STORAGE_CONTEXTS])
-def test_put_bytes(storage_context) -> None:
+def test_put_bytes(storage_context: StorageContext) -> None:
     with storage_context() as storage:
         data = b"hello world"
 
@@ -19,7 +19,7 @@ def test_put_bytes(storage_context) -> None:
 
 
 @pytest.mark.parametrize(["storage_context"], [(c,) for c in STORAGE_CONTEXTS])
-def test_delete(storage_context) -> None:
+def test_delete(storage_context: StorageContext) -> None:
     with storage_context() as storage:
         data = b"cats are cool"
 
@@ -33,4 +33,3 @@ def test_delete(storage_context) -> None:
 
         with pytest.raises(NoSuchKeyError):
             storage.get(key)
-

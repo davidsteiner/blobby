@@ -1,7 +1,7 @@
 import pytest
 from pydantic import BaseModel
 
-from storage_contexts import STORAGE_CONTEXTS
+from storage_contexts import STORAGE_CONTEXTS, StorageContext
 
 
 class DummyData(BaseModel):
@@ -10,7 +10,7 @@ class DummyData(BaseModel):
 
 
 @pytest.mark.parametrize(["storage_context"], [(c,) for c in STORAGE_CONTEXTS])
-def test_put_model_object(storage_context) -> None:
+def test_put_model_object(storage_context: StorageContext) -> None:
     with storage_context() as storage:
         data = DummyData(str_field="str_field", int_field=3)
 
