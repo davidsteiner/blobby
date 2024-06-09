@@ -3,6 +3,7 @@ from typing import Type, TypeVar
 
 from pydantic import BaseModel
 
+from cloud_store.error import NoSuchKeyError
 
 T = TypeVar("T", bound=BaseModel)
 
@@ -11,22 +12,31 @@ _ENCODING = "utf-8"
 
 class Storage(ABC):
     def put_model_object(self, *, key: str, obj: BaseModel) -> None:
-        data = obj.json(by_alias=True)
+        data = obj.model_dump_json(by_alias=True)
         self.put(key=key, data=data.encode(_ENCODING))
 
     def get_model_object(self, *, key: str, object_type: Type[T]) -> T:
         data = self.get(key=key)
-        return object_type.parse_raw(data)
+        return object_type.model_validate_json(data)
 
     @staticmethod
-    def encode(data: str) -> bytes:
+    def _encode(data: str) -> bytes:
         return data.encode(_ENCODING)
 
+    def put(self, key: str, data: bytes | str) -> None:
+        if isinstance(data, str):
+            data = self._encode(data)
+
+        return self._put(key, data)
+
     @abstractmethod
-    def put(self, key: str, data: bytes | str) -> None: ...
+    def _put(self, key: str, data: bytes) -> None: ...
 
     @abstractmethod
     def get(self, key: str) -> bytes: ...
 
     @abstractmethod
     def delete(self, key: str) -> None: ...
+
+    def raise_key_not_found(self, key: str) -> None:
+        raise NoSuchKeyError(f"key {key} not found")
