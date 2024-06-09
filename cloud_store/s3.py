@@ -1,7 +1,5 @@
 import typing
 
-import botocore
-
 from cloud_store.storage import Storage
 
 if typing.TYPE_CHECKING:
@@ -21,7 +19,7 @@ class S3Storage(Storage):
     def get(self, key: str) -> bytes:
         try:
             output = self._client.get_object(Bucket=self._bucket_name, Key=key)
-            return output['Body'].read()
+            return output["Body"].read()
         except self._client.exceptions.NoSuchKey:
             self.raise_key_not_found(key)
 

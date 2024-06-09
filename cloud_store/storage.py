@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Type, TypeVar
+from typing import Type, TypeVar, NoReturn
 
 from pydantic import BaseModel
 
@@ -38,5 +38,5 @@ class Storage(ABC):
     @abstractmethod
     def delete(self, key: str) -> None: ...
 
-    def raise_key_not_found(self, key: str) -> None:
+    def raise_key_not_found(self, key: str) -> NoReturn:
         raise NoSuchKeyError(f"key {key} not found")
