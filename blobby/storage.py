@@ -3,7 +3,7 @@ from typing import Type, TypeVar, NoReturn
 
 from pydantic import BaseModel
 
-from cloud_store.error import NoSuchKeyError
+from blobby.error import NoSuchKeyError
 
 T = TypeVar("T", bound=BaseModel)
 
