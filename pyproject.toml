@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "blobby"
-version = "0.0.2"
+version = "0.0.3"
 description = "Cloud provider agnostic library for object storage."
 authors = ["David Steiner <david_j_steiner@yahoo.co.nz>"]
 readme = "README.md"
