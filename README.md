@@ -1,11 +1,14 @@
 <div align="center">
+
 # Blobby
 
 **A cloud agnostic object storage library.**
 
+[![PyPI Versions Badge](https://badge.fury.io/py/blobby.svg)](https://badge.fury.io/py/blobby/)
+[![PyPI Versions Badge](https://img.shields.io/pypi/pyversions/blobby.svg)](https://pypi.org/project/blobby/)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/5c800180fb3b466fb8964d798aecdcc2)](https://app.codacy.com/gh/davidsteiner/blobby/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/5c800180fb3b466fb8964d798aecdcc2)](https://app.codacy.com/gh/davidsteiner/blobby/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage)
 
-<a href="https://badge.fury.io/py/blobby/"><img src="https://badge.fury.io/py/blobby.svg" alt="Released pypi package." /></a>
-<a href="https://pypi.org/project/blobby/"><img src="https://img.shields.io/pypi/pyversions/blobby.svg" alt="Supported Python versions of the current PyPI release." /></a>
 </div>
 
 ---
