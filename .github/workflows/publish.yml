@@ -22,13 +22,15 @@ jobs:
           poetry-version: 1.8.2
       - name: Install dependencies
         run: |
-          poetry install
-      - name: Run pre-commit checks
-        run: |
-          poetry run pre-commit run --all
-      - name: Run pytest
-        run: |
-          poetry run pytest
+          poetry install --only main,dev
+      - name: Lint
+        run: poetry run ruff check .
+      - name: Check formatting
+        run: poetry run ruff format --check .
+      - name: Type checking
+        run: poetry run mypy .
+      - name: Pytest
+        run: poetry run pytest
 
   release-build:
     runs-on: ubuntu-latest
