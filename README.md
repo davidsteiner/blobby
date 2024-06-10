@@ -1,4 +1,14 @@
+<div align="center">
 # Blobby
+
+**A cloud agnostic object storage library.**
+
+
+<a href="https://badge.fury.io/py/blobby/"><img src="https://badge.fury.io/py/blobby.svg" alt="Released pypi package." /></a>
+<a href="https://pypi.org/project/blobby/"><img src="https://img.shields.io/pypi/pyversions/blobby.svg" alt="Supported Python versions of the current PyPI release." /></a>
+</div>
+
+---
 
 Blobby provides uniform interface for object storage solutions of common cloud providers.
 It also provides a local filesystem-based implementation and an in-memory implementation
