@@ -30,13 +30,16 @@ class Storage(ABC):
         return self._put(key, data)
 
     @abstractmethod
-    def _put(self, key: str, data: bytes) -> None: ...
+    def _put(self, key: str, data: bytes) -> None:
+        ...
 
     @abstractmethod
-    def get(self, key: str) -> bytes: ...
+    def get(self, key: str) -> bytes:
+        ...
 
     @abstractmethod
-    def delete(self, key: str) -> None: ...
+    def delete(self, key: str) -> None:
+        ...
 
     def raise_key_not_found(self, key: str) -> NoReturn:
         raise NoSuchKeyError(f"key {key} not found")
