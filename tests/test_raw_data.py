@@ -31,5 +31,10 @@ def test_delete(storage_context: StorageContext) -> None:
 
         storage.delete(key)
 
+        # The object should no longer exist and raise a NoSuchKeyError
         with pytest.raises(NoSuchKeyError):
             storage.get(key)
+
+        # Subsequent calls to delete should also raise an exception
+        with pytest.raises(NoSuchKeyError):
+            storage.delete(key)
