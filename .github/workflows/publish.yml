@@ -5,9 +5,13 @@ on:
 
 jobs:
   test:
+    name: Quality checks
     uses: ./.github/workflows/test.yml
+    secrets:
+      CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
 
   release-build:
+    name: Build package
     runs-on: ubuntu-latest
     needs:
       - test
@@ -18,6 +22,7 @@ jobs:
       - uses: hynek/build-and-inspect-python-package@v2
 
   pypi-publish:
+    name: Publish on Pypi
     runs-on: ubuntu-latest
     needs:
       - release-build
