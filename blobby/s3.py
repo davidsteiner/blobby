@@ -25,6 +25,12 @@ class S3Storage(Storage):
 
     def delete(self, key: str) -> None:
         try:
+            # we only call head_object because delete_object does not raise
+            # an exception when the object does not exist
+            self._client.head_object(Bucket=self._bucket_name, Key=key)
             self._client.delete_object(Bucket=self._bucket_name, Key=key)
-        except self._client.exceptions.NoSuchKey:
-            self.raise_key_not_found(key)
+        except self._client.exceptions.ClientError as err:
+            if err.response["Error"]["Code"] == "404":
+                self.raise_key_not_found(key)
+            else:
+                raise
