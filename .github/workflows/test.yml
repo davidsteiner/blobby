@@ -24,13 +24,18 @@ jobs:
       with:
         poetry-version: 1.8.2
     - name: Install dependencies
-      run: |
-        poetry install --only main,dev
+      run: poetry install
     - name: Lint
       run: poetry run ruff check .
     - name: Check formatting
       run: poetry run ruff format --check .
     - name: Type checking
       run: poetry run mypy .
-    - name: Pytest
-      run: poetry run pytest
+    - name: Run tests
+      run: |
+        poetry run pytest --cov blobby --cov-report term-missing --cov-report xml
+    - name: Run codacy-coverage-reporter
+      uses: codacy/codacy-coverage-reporter-action@v1
+      with:
+        project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+        coverage-reports: coverage.xml
