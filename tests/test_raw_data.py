@@ -1,6 +1,5 @@
-from pathlib import Path
-
 import pytest
+
 from blobby.error import NoSuchKeyError
 from storage_contexts import STORAGE_CONTEXTS, StorageContext
 
@@ -10,10 +9,10 @@ def test_put_bytes(storage_context: StorageContext) -> None:
     with storage_context() as storage:
         data = b"hello world"
 
-        relative_path = (Path("my_storage") / "test_file").as_posix()
-        storage.put(key=relative_path, data=data)
+        key = "my-storage/foo"
+        storage.put(key=key, data=data)
 
-        retrieved_data = storage.get(relative_path)
+        retrieved_data = storage.get(key)
 
         assert data == retrieved_data
 
@@ -38,3 +37,18 @@ def test_delete(storage_context: StorageContext) -> None:
         # Subsequent calls to delete should also raise an exception
         with pytest.raises(NoSuchKeyError):
             storage.delete(key)
+
+
+@pytest.mark.parametrize(["storage_context"], [(c,) for c in STORAGE_CONTEXTS])
+def test_list(storage_context: StorageContext) -> None:
+    with storage_context() as storage:
+        storage.put("1/foo/file.txt", "test-data")
+        storage.put("1/fool.txt", "test-data")
+        storage.put("2/foo/file.txt", "test-data")
+        storage.put("1/bar/file.txt", "test-data")
+        storage.put("1/fo/file.txt", "test-data")
+
+        objects = storage.list("1/foo")
+        keys = [o.key for o in objects]
+
+        assert set(keys) == {"1/foo/file.txt", "1/fool.txt"}

@@ -1,4 +1,5 @@
 from blobby import Storage
+from blobby.storage import ObjectMeta
 
 
 class MemoryStorage(Storage):
@@ -19,3 +20,6 @@ class MemoryStorage(Storage):
             del self._storage[key]
         except KeyError:
             self.raise_key_not_found(key)
+
+    def list(self, prefix: str) -> list[ObjectMeta]:
+        return [ObjectMeta(key=k) for k in self._storage.keys() if k.startswith(prefix)]
