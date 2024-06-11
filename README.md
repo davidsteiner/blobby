@@ -26,9 +26,9 @@ serialised as JSON documents.
 ## Provider support
 
 - [x] AWS S3
+- [x] Google Cloud Storage
 - [x] Filesystem
 - [x] In-memory
-- [ ] Google Cloud Storage
 - [ ] Azure Blob Storage
 
 ## Creating a storage
@@ -48,6 +48,21 @@ from blobby import S3Storage
 
 client = boto3.client("s3")
 storage = S3Storage(client=client, bucket_name="my-bucket")
+```
+
+### Google Cloud Storage
+
+The Google Cloud Storage leverages the official SDK for 
+Cloud Storage. The bucket object needs to be supplied to the
+storage when it's initialised.
+
+```python
+from google.cloud.storage import Client
+from blobby import GoogleCloudStorage
+
+client = Client()
+bucket = client.bucket("my-bucket")
+storage = GoogleCloudStorage(bucket)
 ```
 
 ### Filesystem storage

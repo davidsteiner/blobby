@@ -6,8 +6,15 @@ from pathlib import Path
 from typing import Iterator, Callable
 
 import boto3
+from google.cloud.storage import Client as GoogleClient
 
-from blobby import FileSystemStorage, S3Storage, Storage, MemoryStorage
+from blobby import (
+    FileSystemStorage,
+    GoogleCloudStorage,
+    S3Storage,
+    Storage,
+    MemoryStorage,
+)
 
 
 StorageContext = Callable[[], AbstractContextManager[Storage]]
@@ -40,4 +47,12 @@ def s3_storage() -> Iterator[Storage]:
     yield S3Storage(client=client, bucket_name=bucket_name)
 
 
-STORAGE_CONTEXTS = [filesystem_storage, memory_storage, s3_storage]
+@contextmanager
+def gcp_storage() -> Iterator[Storage]:
+    client = GoogleClient()
+    bucket = client.bucket("blobby-test")
+
+    yield GoogleCloudStorage(bucket)
+
+
+STORAGE_CONTEXTS = [filesystem_storage, gcp_storage, memory_storage, s3_storage]
