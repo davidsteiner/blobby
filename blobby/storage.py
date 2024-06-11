@@ -10,6 +10,10 @@ T = TypeVar("T", bound=BaseModel)
 _ENCODING = "utf-8"
 
 
+class ObjectMeta(BaseModel):
+    key: str
+
+
 class Storage(ABC):
     def put_model_object(self, *, key: str, obj: BaseModel) -> None:
         data = obj.model_dump_json(by_alias=True)
@@ -37,6 +41,9 @@ class Storage(ABC):
 
     @abstractmethod
     def delete(self, key: str) -> None: ...
+
+    @abstractmethod
+    def list(self, prefix: str) -> list[ObjectMeta]: ...
 
     def raise_key_not_found(self, key: str) -> NoReturn:
         raise NoSuchKeyError(f"key {key} not found")

@@ -1,6 +1,6 @@
 import typing
 
-from blobby.storage import Storage
+from blobby.storage import Storage, ObjectMeta
 
 if typing.TYPE_CHECKING:
     from mypy_boto3_s3 import S3Client
@@ -34,3 +34,8 @@ class S3Storage(Storage):
                 self.raise_key_not_found(key)
             else:
                 raise
+
+    def list(self, prefix: str) -> list[ObjectMeta]:
+        response = self._client.list_objects_v2(Bucket=self._bucket_name, Prefix=prefix)
+
+        return [ObjectMeta(key=meta["Key"]) for meta in response["Contents"]]

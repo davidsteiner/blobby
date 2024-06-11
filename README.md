@@ -106,6 +106,18 @@ key = "my-object"
 storage.delete(key)
 ```
 
+### Listing objects
+
+Currently, only listing by object prefix is supported.
+This isn't very natural for filesystems, but the primary focus
+of this library is object storage solutions, which often
+don't have the concept of a folder or directory.
+
+```python
+prefix = "my/prefix"
+storage.list(prefix)
+```
+
 ## Pydantic objects
 
 Pydantic objects can be written and read using 
