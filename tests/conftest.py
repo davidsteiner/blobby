@@ -1,6 +1,7 @@
 from typing import Iterator
 
 import pytest
+from gcp_storage_emulator.server import create_server
 from moto import mock_aws
 
 
@@ -12,3 +13,19 @@ def mock_s3() -> Iterator[None]:
     yield
 
     mock.stop()
+
+
+@pytest.fixture(scope="session", autouse=True)
+def mock_google_cloud_storage() -> Iterator[None]:
+    with pytest.MonkeyPatch.context() as patch:
+        host = "localhost"
+        port = 9023
+        server = create_server(
+            host=host, port=port, in_memory=True, default_bucket="blobby-test"
+        )
+
+        patch.setenv("STORAGE_EMULATOR_HOST", f"http://{host}:{port}")
+
+        server.start()
+        yield
+        server.stop()
