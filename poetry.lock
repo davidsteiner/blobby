@@ -23,6 +23,45 @@ files = [
 ]
 
 [[package]]
+name = "azure-core"
+version = "1.30.2"
+description = "Microsoft Azure Core Library for Python"
+optional = true
+python-versions = ">=3.8"
+files = [
+    {file = "azure-core-1.30.2.tar.gz", hash = "sha256:a14dc210efcd608821aa472d9fb8e8d035d29b68993819147bc290a8ac224472"},
+    {file = "azure_core-1.30.2-py3-none-any.whl", hash = "sha256:cf019c1ca832e96274ae85abd3d9f752397194d9fea3b41487290562ac8abe4a"},
+]
+
+[package.dependencies]
+requests = ">=2.21.0"
+six = ">=1.11.0"
+typing-extensions = ">=4.6.0"
+
+[package.extras]
+aio = ["aiohttp (>=3.0)"]
+
+[[package]]
+name = "azure-storage-blob"
+version = "12.20.0"
+description = "Microsoft Azure Blob Storage Client Library for Python"
+optional = true
+python-versions = ">=3.8"
+files = [
+    {file = "azure-storage-blob-12.20.0.tar.gz", hash = "sha256:eeb91256e41d4b5b9bad6a87fd0a8ade07dd58aa52344e2c8d2746e27a017d3b"},
+    {file = "azure_storage_blob-12.20.0-py3-none-any.whl", hash = "sha256:de6b3bf3a90e9341a6bcb96a2ebe981dffff993e9045818f6549afea827a52a9"},
+]
+
+[package.dependencies]
+azure-core = ">=1.28.0"
+cryptography = ">=2.1.4"
+isodate = ">=0.6.1"
+typing-extensions = ">=4.6.0"
+
+[package.extras]
+aio = ["azure-core[aio] (>=1.28.0)"]
+
+[[package]]
 name = "boto3"
 version = "1.34.124"
 description = "The AWS SDK for Python"
@@ -1054,6 +1093,20 @@ files = [
 ]
 
 [[package]]
+name = "isodate"
+version = "0.6.1"
+description = "An ISO 8601 date/time/duration parser and formatter"
+optional = true
+python-versions = "*"
+files = [
+    {file = "isodate-0.6.1-py2.py3-none-any.whl", hash = "sha256:0751eece944162659049d35f4f549ed815792b38793f07cf73381c1c87cbed96"},
+    {file = "isodate-0.6.1.tar.gz", hash = "sha256:48c5881de7e8b0a0d648cb024c8062dc84e7b840ed81e864c7614fd3c127bde9"},
+]
+
+[package.dependencies]
+six = "*"
+
+[[package]]
 name = "isort"
 version = "5.13.2"
 description = "A Python utility / library to sort Python imports."
@@ -1481,13 +1534,13 @@ files = [
 
 [[package]]
 name = "pydantic"
-version = "2.7.3"
+version = "2.7.4"
 description = "Data validation using Python type hints"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "pydantic-2.7.3-py3-none-any.whl", hash = "sha256:ea91b002777bf643bb20dd717c028ec43216b24a6001a280f83877fd2655d0b4"},
-    {file = "pydantic-2.7.3.tar.gz", hash = "sha256:c46c76a40bb1296728d7a8b99aa73dd70a48c3510111ff290034f860c99c419e"},
+    {file = "pydantic-2.7.4-py3-none-any.whl", hash = "sha256:ee8538d41ccb9c0a9ad3e0e5f07bf15ed8015b481ced539a1759d8cc89ae90d0"},
+    {file = "pydantic-2.7.4.tar.gz", hash = "sha256:0c84efd9548d545f63ac0060c1e4d39bb9b14db8b3c0652338aecc07b5adec52"},
 ]
 
 [package.dependencies]
@@ -1934,9 +1987,10 @@ files = [
 
 [extras]
 aws = ["boto3"]
+azure = ["azure-storage-blob"]
 gcp = ["google-cloud-storage"]
 
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "560dc16caeff5ffd6a254afd891d036972347f0cd591e923e95496b959def0ca"
+content-hash = "b1e3639d2e7dd78932ffceae2fec9a3b33768b211f85986a91c449684eaf992e"
