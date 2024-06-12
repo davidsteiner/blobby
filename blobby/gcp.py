@@ -1,5 +1,10 @@
-from google.cloud.exceptions import NotFound
-from google.cloud.storage import Bucket
+try:
+    from google.cloud.exceptions import NotFound
+    from google.cloud.storage import Bucket
+except ImportError as e:
+    raise ImportError(
+        "GCP support is not installed, run `pip install blobby[gcp]`"
+    ) from e
 
 from blobby import Storage
 from blobby.storage import ObjectMeta
