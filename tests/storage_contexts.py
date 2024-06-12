@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Iterator, Callable
 
 import boto3
+from azure.storage.blob import BlobServiceClient
 from google.cloud.storage import Client as GoogleClient
 
 from blobby import (
@@ -15,7 +16,7 @@ from blobby import (
     Storage,
     MemoryStorage,
 )
-
+from blobby.azure import AzureBlobStorage
 
 StorageContext = Callable[[], AbstractContextManager[Storage]]
 
@@ -55,4 +56,19 @@ def gcp_storage() -> Iterator[Storage]:
     yield GoogleCloudStorage(bucket)
 
 
-STORAGE_CONTEXTS = [filesystem_storage, gcp_storage, memory_storage, s3_storage]
+@contextmanager
+def azure_blob_storage() -> Iterator[Storage]:
+    url = "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://127.0.0.1:10000/devstoreaccount1;"
+    service_client = BlobServiceClient.from_connection_string(url)
+    container_client = service_client.create_container(uuid.uuid4().hex)
+
+    yield AzureBlobStorage(container_client)
+
+
+STORAGE_CONTEXTS = [
+    azure_blob_storage,
+    filesystem_storage,
+    gcp_storage,
+    memory_storage,
+    s3_storage,
+]
