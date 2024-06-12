@@ -1,4 +1,5 @@
 import typing
+from importlib.util import find_spec
 
 from blobby.storage import Storage, ObjectMeta
 
@@ -6,6 +7,10 @@ if typing.TYPE_CHECKING:
     from mypy_boto3_s3 import S3Client
 else:
     S3Client = object
+
+
+if not find_spec("boto3"):
+    raise ImportError("AWS support is not installed, run `pip install blobby[aws]`")
 
 
 class S3Storage(Storage):

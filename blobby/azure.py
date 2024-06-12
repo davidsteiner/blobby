@@ -1,5 +1,10 @@
-from azure.core.exceptions import ResourceNotFoundError
-from azure.storage.blob import ContainerClient
+try:
+    from azure.core.exceptions import ResourceNotFoundError
+    from azure.storage.blob import ContainerClient
+except ImportError as e:
+    raise ImportError(
+        "Azure support is not installed, run `pip install blobby[azure]`"
+    ) from e
 
 from blobby import Storage
 from blobby.storage import ObjectMeta

@@ -38,19 +38,44 @@ offer a uniform API.
 
 ### AWS S3 storage
 
+> :warning: **Install blobby with the `aws` extra, i.e.**
+> `pip install blobby[aws]`
+
 The S3 implementation uses a `boto3` client, which needs to be
 passed in when the storage is initialised. An S3 storage object
 represents a bucket, whose name also needs to be supplied.
 
 ```python
 import boto3
-from blobby import S3Storage
+from blobby.aws import S3Storage
 
 client = boto3.client("s3")
 storage = S3Storage(client=client, bucket_name="my-bucket")
 ```
 
+### Azure Blob Storage
+
+> :warning: **Install blobby with the `azure` extra, i.e.**
+> `pip install blobby[azure]`
+
+The Azure implementation leverages the Azure SDK for Python.
+The storage expects the storage client to be provided.
+
+```python
+from azure.storage.blob import BlobServiceClient
+from blobby.azure import AzureBlobStorage
+
+url = "<connection_string>"
+service_client = BlobServiceClient.from_connection_string(url)
+container_client = service_client.create_container("my-container")
+
+storage = AzureBlobStorage(container_client)
+```
+
 ### Google Cloud Storage
+
+> :warning: **Install blobby with the `gcp` extra, i.e.**
+> `pip install blobby[gcp]`
 
 The Google Cloud Storage leverages the official SDK for 
 Cloud Storage. The bucket object needs to be supplied to the
@@ -58,7 +83,7 @@ storage when it's initialised.
 
 ```python
 from google.cloud.storage import Client
-from blobby import GoogleCloudStorage
+from blobby.gcp import GoogleCloudStorage
 
 client = Client()
 bucket = client.bucket("my-bucket")
@@ -72,7 +97,7 @@ needs to be provided. All files will be relative to this
 directory.
 
 ```python
-from blobby import FileSystemStorage
+from blobby.filesystem import FileSystemStorage
 
 storage = FileSystemStorage(root_dir="/my/storage/", create_missing_dirs=True)
 ```
@@ -86,7 +111,7 @@ The in-memory implementation is backed with a simple dictionary stored
 in memory.
 
 ```python
-from blobby import MemoryStorage
+from blobby.memory import MemoryStorage
 
 storage = MemoryStorage()
 ```

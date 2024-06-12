@@ -9,14 +9,12 @@ import boto3
 from azure.storage.blob import BlobServiceClient
 from google.cloud.storage import Client as GoogleClient
 
-from blobby import (
-    FileSystemStorage,
-    GoogleCloudStorage,
-    S3Storage,
-    Storage,
-    MemoryStorage,
-)
+from blobby import Storage
+from blobby.aws import S3Storage
 from blobby.azure import AzureBlobStorage
+from blobby.filesystem import FileSystemStorage
+from blobby.gcp import GoogleCloudStorage
+from blobby.memory import MemoryStorage
 
 StorageContext = Callable[[], AbstractContextManager[Storage]]
 
