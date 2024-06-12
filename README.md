@@ -4,10 +4,11 @@
 
 **A cloud agnostic object storage library.**
 
-[![PyPI Versions Badge](https://badge.fury.io/py/blobby.svg)](https://badge.fury.io/py/blobby/)
-[![PyPI Versions Badge](https://img.shields.io/pypi/pyversions/blobby.svg)](https://pypi.org/project/blobby/)
+[![pypi](https://img.shields.io/pypi/v/blobby.svg)](https://pypi.org/project/blobby/)
+[![versions](https://img.shields.io/pypi/pyversions/blobby.svg)](https://github.com/davidsteiner/blobby/)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/5c800180fb3b466fb8964d798aecdcc2)](https://app.codacy.com/gh/davidsteiner/blobby/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/5c800180fb3b466fb8964d798aecdcc2)](https://app.codacy.com/gh/davidsteiner/blobby/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage)
+[![license](https://img.shields.io/github/license/davidsteiner/blobby.svg)](https://github.com/davidsteiner/blobby/blob/main/LICENSE)
 
 </div>
 
@@ -26,10 +27,10 @@ serialised as JSON documents.
 ## Provider support
 
 - [x] AWS S3
-- [x] Google Cloud Storage
+- [x] Azure Blob Storage
 - [x] Filesystem
+- [x] Google Cloud Storage
 - [x] In-memory
-- [ ] Azure Blob Storage
 
 ## Creating a storage
 
